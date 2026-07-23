@@ -4,6 +4,7 @@ use clap::{Parser, Subcommand};
 use idle_studio::job::StudioJob;
 use idle_studio::queue::{default_queue_path, JobQueue, JobStatus};
 use idle_studio::runner::run_job;
+use idle_studio::tui::run_tui;
 use std::path::PathBuf;
 use std::process::ExitCode;
 
@@ -23,6 +24,8 @@ struct Args {
 
 #[derive(Debug, Subcommand)]
 enum Cmd {
+    /// Interactive Director TUI
+    Tui,
     /// Add a job to the queue
     Enqueue {
         #[arg(long, short = 'e')]
@@ -43,6 +46,12 @@ enum Cmd {
         dry_run: bool,
         #[arg(long)]
         id: Option<String>,
+        /// Segment length for long encodes (e.g. 1h)
+        #[arg(long)]
+        segment: Option<String>,
+        /// Audio bed path
+        #[arg(long)]
+        audio: Option<PathBuf>,
     },
     /// List queue entries
     List,
@@ -56,6 +65,17 @@ enum Cmd {
 fn main() -> ExitCode {
     let args = Args::parse();
     let path = args.queue.unwrap_or_else(default_queue_path);
+
+    if matches!(args.cmd, Cmd::Tui) {
+        return match run_tui(&path) {
+            Ok(()) => ExitCode::SUCCESS,
+            Err(e) => {
+                eprintln!("idle-studio: {e}");
+                ExitCode::from(1)
+            }
+        };
+    }
+
     let mut queue = match JobQueue::load(&path) {
         Ok(q) => q,
         Err(e) => {
@@ -64,7 +84,8 @@ fn main() -> ExitCode {
         }
     };
 
-    let result = match args.cmd {
+    match args.cmd {
+        Cmd::Tui => ExitCode::SUCCESS,
         Cmd::Enqueue {
             effect,
             output,
@@ -75,6 +96,8 @@ fn main() -> ExitCode {
             height,
             dry_run,
             id,
+            segment,
+            audio,
         } => {
             let id = id.unwrap_or_else(|| format!("job-{}", queue.entries.len() + 1));
             queue.enqueue(StudioJob {
@@ -88,6 +111,8 @@ fn main() -> ExitCode {
                 width,
                 height,
                 dry_run,
+                segment,
+                audio,
             });
             match queue.save(&path) {
                 Ok(()) => {
@@ -144,6 +169,5 @@ fn main() -> ExitCode {
             }
             code
         }
-    };
-    result
+    }
 }

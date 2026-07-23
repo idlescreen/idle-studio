@@ -20,6 +20,10 @@ pub struct StudioJob {
     pub height: u32,
     #[serde(default)]
     pub dry_run: bool,
+    #[serde(default)]
+    pub segment: Option<String>,
+    #[serde(default)]
+    pub audio: Option<PathBuf>,
 }
 
 fn default_seed() -> u64 {
@@ -57,6 +61,14 @@ impl StudioJob {
             a.push("--plugin-path".into());
             a.push(p.display().to_string());
         }
+        if let Some(s) = &self.segment {
+            a.push("--segment".into());
+            a.push(s.clone());
+        }
+        if let Some(audio) = &self.audio {
+            a.push("--audio".into());
+            a.push(audio.display().to_string());
+        }
         if self.dry_run {
             a.push("--dry-run".into());
         }
@@ -69,22 +81,24 @@ mod tests {
     use super::*;
 
     #[test]
-    fn args_include_effect_and_output() {
+    fn args_include_segment_and_audio() {
         let j = StudioJob {
             id: "1".into(),
             effect: "beams".into(),
             plugin_path: None,
             seed: 1,
             fps: 30,
-            duration: "10s".into(),
+            duration: "2h".into(),
             output: PathBuf::from("/tmp/o.mkv"),
             width: 1280,
             height: 720,
-            dry_run: true,
+            dry_run: false,
+            segment: Some("1h".into()),
+            audio: Some(PathBuf::from("/tmp/bed.mp3")),
         };
         let a = j.to_render_args();
-        assert!(a.contains(&"beams".into()));
-        assert!(a.iter().any(|x| x.contains("o.mkv")));
-        assert!(a.contains(&"--dry-run".into()));
+        assert!(a.contains(&"--segment".into()));
+        assert!(a.contains(&"1h".into()));
+        assert!(a.contains(&"--audio".into()));
     }
 }

@@ -103,6 +103,8 @@ mod tests {
             width: 64,
             height: 64,
             dry_run: true,
+            segment: None,
+            audio: None,
         });
         q.save(&path).unwrap();
         let loaded = JobQueue::load(&path).unwrap();
