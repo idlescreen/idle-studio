@@ -23,7 +23,7 @@ pub struct StudioJob {
 }
 
 fn default_seed() -> u64 {
-    0xC0FF_EE
+    0x00C0_FFEE
 }
 fn default_fps() -> u32 {
     30

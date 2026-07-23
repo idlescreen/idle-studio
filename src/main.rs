@@ -31,7 +31,7 @@ enum Cmd {
         output: PathBuf,
         #[arg(long, default_value = "10s")]
         duration: String,
-        #[arg(long, default_value_t = 0xC0FF_EEu64)]
+        #[arg(long, default_value_t = 0x00C0_FFEEu64)]
         seed: u64,
         #[arg(long, default_value_t = 30)]
         fps: u32,
