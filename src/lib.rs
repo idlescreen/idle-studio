@@ -10,3 +10,6 @@ pub use error::StudioError;
 pub use job::StudioJob;
 pub use queue::{JobQueue, JobStatus};
 pub use runner::run_job;
+
+#[cfg(test)]
+mod proptests;

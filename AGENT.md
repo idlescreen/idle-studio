@@ -1,6 +1,8 @@
-# AGENT.md — idle-studio
+# AGENT.md — idle-studio (Phase B contract)
 
-- Rust, Apache-2.0.
-- Max 250 lines per .rs file; no unwrap/expect in production code.
-- Depends conceptually on idle-render; do not duplicate the encode loop.
+- Strict Rust, Apache-2.0.
+- Max 250 lines per `.rs` file.
+- Zero `.unwrap()` / `.expect()` in production code.
+- Prefer `std`; vetted crates only.
+- Queue JSON and CLI flag mapping covered by unit and property tests.
 - Default branch: master.
