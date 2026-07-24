@@ -1,10 +1,10 @@
 [package]
-name = "app-studio"
+name = "idle-studio"
 version = "0.2.1"
 edition = "2021"
 license = "Apache-2.0"
 description = "IdleScreen Director — queue offline render jobs (CLI + TUI)"
-repository = "https://github.com/idlescreen/app-studio"
+repository = "https://github.com/idlescreen/idle-studio"
 readme = "README.md"
 
 [lib]
@@ -12,11 +12,11 @@ name = "idle_studio"
 path = "src/lib.rs"
 
 [[bin]]
-name = "app-studio"
+name = "idle-studio"
 path = "src/main.rs"
 
 [[bin]]
-name = "idle-studio"
+name = "app-studio"
 path = "src/main.rs"
 
 [dependencies]
