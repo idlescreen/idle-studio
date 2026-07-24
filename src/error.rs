@@ -9,9 +9,9 @@ pub enum StudioError {
     },
     #[error("json error: {0}")]
     Json(#[from] serde_json::Error),
-    #[error("idle-render failed: {0}")]
+    #[error("render failed: {0}")]
     Render(String),
-    #[error("idle-render binary not found (set IDLE_RENDER or PATH)")]
+    #[error("render binary not found (set RENDER / IDLE_RENDER or PATH)")]
     RenderMissing,
     #[error("queue error: {0}")]
     Queue(String),

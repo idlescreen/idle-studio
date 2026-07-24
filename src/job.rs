@@ -1,7 +1,7 @@
 use serde::{Deserialize, Serialize};
 use std::path::PathBuf;
 
-/// One offline render request (mirrors idle-render CLI flags).
+/// One offline render request (mirrors render CLI flags).
 #[derive(Debug, Clone, Serialize, Deserialize, PartialEq, Eq)]
 pub struct StudioJob {
     pub id: String,

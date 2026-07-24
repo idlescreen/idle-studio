@@ -1,4 +1,4 @@
-//! idle-studio — queue and run offline idle-render jobs.
+//! app-studio — queue and run offline render jobs.
 
 use clap::{Parser, Subcommand};
 use idle_studio::job::StudioJob;
@@ -10,8 +10,8 @@ use std::process::ExitCode;
 
 #[derive(Debug, Parser)]
 #[command(
-    name = "idle-studio",
-    about = "IdleScreen Director — job queue for idle-render"
+    name = "app-studio",
+    about = "IdleScreen Director — job queue for render"
 )]
 struct Args {
     /// Queue file (JSON)
@@ -70,7 +70,7 @@ fn main() -> ExitCode {
         return match run_tui(&path) {
             Ok(()) => ExitCode::SUCCESS,
             Err(e) => {
-                eprintln!("idle-studio: {e}");
+                eprintln!("app-studio: {e}");
                 ExitCode::from(1)
             }
         };
@@ -79,7 +79,7 @@ fn main() -> ExitCode {
     let mut queue = match JobQueue::load(&path) {
         Ok(q) => q,
         Err(e) => {
-            eprintln!("idle-studio: {e}");
+            eprintln!("app-studio: {e}");
             return ExitCode::from(2);
         }
     };
@@ -120,7 +120,7 @@ fn main() -> ExitCode {
                     ExitCode::SUCCESS
                 }
                 Err(e) => {
-                    eprintln!("idle-studio: {e}");
+                    eprintln!("app-studio: {e}");
                     ExitCode::from(1)
                 }
             }

@@ -70,15 +70,15 @@ impl JobQueue {
 /// Default queue path under the user's config dir or CWD.
 pub fn default_queue_path() -> PathBuf {
     if let Ok(xdg) = std::env::var("XDG_CONFIG_HOME") {
-        return PathBuf::from(xdg).join("idle-studio").join("queue.json");
+        return PathBuf::from(xdg).join("app-studio").join("queue.json");
     }
     if let Ok(home) = std::env::var("HOME") {
         return PathBuf::from(home)
             .join(".config")
-            .join("idle-studio")
+            .join("app-studio")
             .join("queue.json");
     }
-    PathBuf::from("idle-studio-queue.json")
+    PathBuf::from("app-studio-queue.json")
 }
 
 #[cfg(test)]
@@ -87,7 +87,7 @@ mod tests {
 
     #[test]
     fn roundtrip_queue() {
-        let dir = std::env::temp_dir().join(format!("idle-studio-q-{}", std::process::id()));
+        let dir = std::env::temp_dir().join(format!("app-studio-q-{}", std::process::id()));
         let _ = fs::remove_dir_all(&dir);
         fs::create_dir_all(&dir).unwrap();
         let path = dir.join("q.json");

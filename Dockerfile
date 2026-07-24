@@ -6,5 +6,5 @@ RUN cargo build --release
 
 FROM alpine:3.20
 RUN apk add --no-cache libgcc
-COPY --from=build /src/target/release/idle-studio /usr/local/bin/idle-studio
-ENTRYPOINT ["idle-studio"]
+COPY --from=build /src/target/release/app-studio /usr/local/bin/app-studio
+ENTRYPOINT ["app-studio"]

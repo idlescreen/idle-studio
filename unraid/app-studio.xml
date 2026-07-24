@@ -1,0 +1,14 @@
+<?xml version="1.0"?>
+<Container version="2">
+  <Name>app-studio</Name>
+  <Repository>ghcr.io/idlescreen/app-studio:latest</Repository>
+  <Registry>https://ghcr.io/</Registry>
+  <Network>bridge</Network>
+  <Shell>sh</Shell>
+  <Privileged>false</Privileged>
+  <Support>https://github.com/idlescreen/app-studio</Support>
+  <Project>https://github.com/idlescreen/app-studio</Project>
+  <Overview>IdleScreen Director job queue. Prefer running next to render on a workstation.</Overview>
+  <Category>Tools:</Category>
+  <Description>Batch controller for offline IdleScreen encodes.</Description>
+</Container>

@@ -1,7 +1,7 @@
-# idle-studio
+# app-studio
 
 Director surface for IdleScreen offline export. Queues render jobs for
-idle-render, exposes a CLI, and provides an interactive terminal UI for overnight
+render, exposes a CLI, and provides an interactive terminal UI for overnight
 batches.
 
 ## Capabilities
@@ -14,20 +14,20 @@ batches.
 ## Build
 
 ```bash
-git clone https://github.com/idlescreen/idle-studio.git
-cd idle-studio
+git clone https://github.com/idlescreen/app-studio.git
+cd app-studio
 cargo build --release
 ```
 
-Set `IDLE_RENDER` to the idle-render binary when it is not on `PATH`.
+Set `IDLESCREEN_RENDER` to the render binary when it is not on `PATH`.
 
 ## CLI
 
 ```bash
-idle-studio enqueue -e beams -o /tmp/a.mkv --duration 8h --segment 1h
-idle-studio list
-idle-studio run --all
-idle-studio tui
+app-studio enqueue -e beams -o /tmp/a.mkv --duration 8h --segment 1h
+app-studio list
+app-studio run --all
+app-studio tui
 ```
 
 ## TUI keys
@@ -44,7 +44,7 @@ idle-studio tui
 
 | Project | Role |
 |---------|------|
-| idle-render | Simulation and encode engine |
+| render | Simulation and encode engine |
 | idle-core | Live daemon and plugin API |
 | packages | Package host |
 

@@ -1,4 +1,4 @@
-//! IdleScreen Studio — job queue for `idle-render`.
+//! IdleScreen Studio — job queue for `render`.
 
 pub mod error;
 pub mod job;
